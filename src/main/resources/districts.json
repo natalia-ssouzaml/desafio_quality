@@ -8,11 +8,13 @@
     "id": 2,
     "name": "Bairro do Mauri",
     "valueM2": 600
-  },{
+  },
+  {
     "id": 3,
     "name": "Interior",
     "valueM2": 100
-  },{
+  },
+  {
     "id": 4,
     "name": "Centro",
     "valueM2": 1000
