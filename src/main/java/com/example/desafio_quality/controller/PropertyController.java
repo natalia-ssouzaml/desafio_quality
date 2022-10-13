@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class PropertyController {
     PropertyService propertyService;
 
     @PostMapping
-    public ResponseEntity<Property> createProperty(@RequestBody Property property) {
+    public ResponseEntity<Property> createProperty(@Valid @RequestBody Property property) {
         return new ResponseEntity<>(propertyService.createProperty(property), HttpStatus.CREATED);
     }
 

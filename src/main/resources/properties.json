@@ -37,43 +37,4 @@
     "width" : 3.0,
     "length" : 3.0
   } ]
-}, {
-  "id" : 4,
-  "name" : "Casa Messi",
-  "districtId" : 3,
-  "rooms" : [ {
-    "name" : "Quarto",
-    "width" : 6.0,
-    "length" : 3.0
-  }, {
-    "name" : "Cozinha",
-    "width" : 3.0,
-    "length" : 3.0
-  } ]
-}, {
-  "id" : 5,
-  "name" : "Casa Messi",
-  "districtId" : 3,
-  "rooms" : [ {
-    "name" : "Quarto",
-    "width" : 6.0,
-    "length" : 3.0
-  }, {
-    "name" : "Cozinha",
-    "width" : 3.0,
-    "length" : 3.0
-  } ]
-}, {
-  "id" : 6,
-  "name" : "Casa Messi",
-  "districtId" : 3,
-  "rooms" : [ {
-    "name" : "Quarto",
-    "width" : 6.0,
-    "length" : 3.0
-  }, {
-    "name" : "Cozinha",
-    "width" : 3.0,
-    "length" : 3.0
-  } ]
 } ]
