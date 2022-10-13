@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "d01454d3-5d99-4ef7-858a-c82e34cc2458",
+		"name": "DesafioQuality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23755010"
+	},
+	"item": [
+		{
+			"name": "POST New property",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Hotel do Mauri\",\n    \"districtId\": 4,\n    \"rooms\": [\n        {\n            \"name\": \"Hall\",\n            \"width\": 15.0,\n            \"length\": 7.0\n        },\n        {\n            \"name\": \"Quarto\",\n            \"width\": 6.0,\n            \"length\": 7.0\n        },\n        {\n            \"name\": \"Banheiro\",\n            \"width\": 3.0,\n            \"length\": 10.0\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{localhost}}/property"
+			},
+			"response": []
+		},
+		{
+			"name": "GET totalM2 by property",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "{{localhost}}/property/totalM2/lavoura do mauri"
+			},
+			"response": []
+		},
+		{
+			"name": "GET price by property",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "{{localhost}}/property/price/lavoura do mauri"
+			},
+			"response": []
+		},
+		{
+			"name": "GET totalM2 per room by property",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "{{localhost}}/property/totalM2ByRooms/lavoura do mauri"
+			},
+			"response": []
+		},
+		{
+			"name": "GET biggest room by property",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "{{localhost}}/property/biggestRoom/lavoura do mauri"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "localhost:8080"
+		}
+	]
+}
