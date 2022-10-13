@@ -9,4 +9,8 @@ public class Room {
     private double width;
     private double length;
 
+    public double totalM2() {
+        return width * length;
+    }
+
 }
