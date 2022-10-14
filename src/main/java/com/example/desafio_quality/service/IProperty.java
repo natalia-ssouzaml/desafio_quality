@@ -11,7 +11,7 @@ public interface IProperty {
 
     double getPropertyTotalM2(String propertyName);
     BigDecimal getPropertyValue(String propertyName);
-    Room getBiggestRoom(String propertyName);
+    RoomDTO getBiggestRoom(String propertyName);
     List<RoomDTO>getTotalM2ByRoom(String propertyName);
 
 
