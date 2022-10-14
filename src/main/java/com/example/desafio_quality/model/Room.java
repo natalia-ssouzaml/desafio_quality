@@ -1,10 +1,12 @@
 package com.example.desafio_quality.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.*;
 
 @Data
+@Builder
 public class Room {
     @NotBlank(message = "The name of the room can't be empty")
     @Pattern(regexp = "^[A-Z][a-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$", message = "The name of the room must start with a capital letter")

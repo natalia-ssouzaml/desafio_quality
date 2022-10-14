@@ -1,5 +1,6 @@
 package com.example.desafio_quality.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 
 @Data
+@Builder
 public class Property {
     private int id;
     @NotBlank(message = "The name of the property can't be empty")

@@ -1,11 +1,13 @@
 package com.example.desafio_quality.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
+@Builder
 public class District {
 
     private int id;

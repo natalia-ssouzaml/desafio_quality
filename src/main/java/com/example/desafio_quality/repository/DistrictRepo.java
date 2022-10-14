@@ -26,6 +26,7 @@ public class DistrictRepo {
     }
 
     public Optional<District> getDistrictById(int districtId) {
+        getAllDistricts();
         return getAllDistricts().stream()
                 .filter(d -> d.getId() == districtId)
                 .findFirst();

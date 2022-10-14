@@ -37,7 +37,6 @@ public class PropertyRepo {
     }
 
 
-    //Create
     public Property createProperty(Property property) {
         ObjectMapper mapper = new ObjectMapper();
 
