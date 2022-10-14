@@ -13,10 +13,12 @@ public class Room {
 
     @NotNull(message = "The width of the room can't be empty")
     @Max(value = 25, message = "The maximum width allowed per room is 25 meters")
+    @Positive(message= "The value must be positive")
     private double width;
 
     @NotNull(message = "The width of the room can't be empty")
     @Max(value = 33, message = "The maximum width allowed per room is 33 meters")
+    @Positive(message= "The value must be positive")
     private double length;
 
     public double totalM2() {

@@ -44,13 +44,9 @@ public class PropertyService implements IProperty {
     @Override
     public BigDecimal getPropertyValue(String propertyName) {
         Property property = getProperty(propertyName);
-        Optional<District> district = districtRepo.getDistrictById(property.getDistrictId());
-        if (district.isEmpty()) {
-            throw new NotFoundException("DistrictId [" + property.getDistrictId() + "] does not exist");
-        }
-
+        District district = districtRepo.getDistrictById(property.getDistrictId()).get();
         double valueM2 = getPropertyTotalM2(propertyName);
-        return district.get().getValueM2().multiply(BigDecimal.valueOf(valueM2));
+        return district.getValueM2().multiply(BigDecimal.valueOf(valueM2));
     }
 
     @Override
@@ -69,7 +65,9 @@ public class PropertyService implements IProperty {
 
     @Override
     public Property createProperty(Property property) {
+        districtRepo.getDistrictById(property.getDistrictId()).orElseThrow(() -> new NotFoundException("DistrictId does not exist"));
         return propertyRepo.createProperty(property);
+
     }
 
 }
