@@ -142,8 +142,6 @@ public class PropertyServiceTest {
     @Test
     void getBiggestRoom_returnTheBiggestRoom_whenCorrectsAttributes() {
         when(propertyRepo.getByName(property.getName())).thenReturn(Optional.of(property));
-        var result = propertyService.getTotalM2ByRoom(property.getName());
-        result.stream().max(Comparator.comparing(RoomDTO::getTotalM2)).get();
         var biggest = propertyService.getBiggestRoom(property.getName());
         assertFalse(list.isEmpty());
         Assertions.assertEquals(18.0, biggest.getTotalM2());
