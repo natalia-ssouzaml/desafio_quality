@@ -6,6 +6,9 @@ import com.example.desafio_quality.model.Property;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -17,10 +20,21 @@ import java.util.Optional;
 @Repository
 public class PropertyRepo {
 
-    private final String linkFile = "src/main/resources/properties.json";
+    private String linkFile;
+
+    @Value("${spring.profiles.active:}")
+    private String activeProfile;
 
     public List<Property> getAllProperties() {
         ObjectMapper mapper = new ObjectMapper();
+
+
+        if (activeProfile.equals("test")) {
+            linkFile = "src/main/resources/test-properties.json";
+        } else {
+            linkFile = "src/main/resources/properties.json";
+        }
+
         try {
             return Arrays.asList(mapper.readValue(new File(linkFile), Property[].class));
 
@@ -45,7 +59,12 @@ public class PropertyRepo {
         List<Property> propertyList = getAllProperties();
         propertyList = new ArrayList<>(propertyList);
 
-        property.setId(propertyList.get(propertyList.size() - 1).getId() + 1);
+        if (propertyList.size() == 0) {
+            property.setId(1);
+        } else {
+            property.setId(propertyList.get(propertyList.size() - 1).getId() + 1);
+        }
+
         propertyList.add(property);
 
         try {
