@@ -37,19 +37,15 @@ class PropertyControllerTest {
     @MockBean
     private PropertyService propertyService;
 
-    //Tipos de retornos ResponseEntity
     private Property property;
     private RoomDTO roomDTO;
-    private List<RoomDTO> roomDTOList;
     private District district;
 
     @BeforeEach
     void setup() {
-        //Inicializando
-        List<Room> listRoom = new ArrayList<>();
-        roomDTOList = new ArrayList<>();
 
-        //Criando Rooms
+        List<Room> listRoom = new ArrayList<>();
+
         Room roomI = Room.builder()
                 .name("Quarto")
                 .width(6.0)
@@ -61,11 +57,9 @@ class PropertyControllerTest {
                 .length(4.0)
                 .build();
 
-        //Adicionando Rooms a lista de rooms
         listRoom.add(roomI);
         listRoom.add(roomII);
 
-        //Adicionando maior quarto ao roomDTO para testar.
         roomDTO = new RoomDTO(roomI);
 
         district = District.builder()
@@ -132,8 +126,7 @@ class PropertyControllerTest {
 
     @Test
     void getTotalM2ByRoom_whenCorrectsAttributes() throws Exception {
-
-        roomDTOList.add(roomDTO);
+        List<RoomDTO> roomDTOList = new ArrayList<>(List.of(roomDTO));
 
         BDDMockito.when(propertyService.getTotalM2ByRoom(property.getName()))
                 .thenReturn(roomDTOList);
