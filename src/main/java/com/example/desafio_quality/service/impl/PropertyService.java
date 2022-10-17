@@ -4,7 +4,6 @@ import com.example.desafio_quality.Exception.NotFoundException;
 import com.example.desafio_quality.dto.RoomDTO;
 import com.example.desafio_quality.model.District;
 import com.example.desafio_quality.model.Property;
-import com.example.desafio_quality.model.Room;
 import com.example.desafio_quality.repository.DistrictRepo;
 import com.example.desafio_quality.repository.PropertyRepo;
 import com.example.desafio_quality.service.IProperty;
@@ -32,20 +31,24 @@ public class PropertyService implements IProperty {
         return property.get();
     }
 
+    private double calculatePropertyTotalM2(Property property) {
+        return property.getRooms().stream()
+                .mapToDouble(r -> r.getLength() * r.getWidth()).sum();
+    }
 
     @Override
     public double getPropertyTotalM2(String propertyName) {
         Property property = getProperty(propertyName);
-        return property.getRooms().stream()
-                .mapToDouble(r -> r.getLength() * r.getWidth()).sum();
+        return calculatePropertyTotalM2(property);
     }
+
 
 
     @Override
     public BigDecimal getPropertyValue(String propertyName) {
         Property property = getProperty(propertyName);
         District district = districtRepo.getDistrictById(property.getDistrictId()).get();
-        double valueM2 = getPropertyTotalM2(propertyName);
+        double valueM2 = calculatePropertyTotalM2(property);
         return district.getValueM2().multiply(BigDecimal.valueOf(valueM2));
     }
 
