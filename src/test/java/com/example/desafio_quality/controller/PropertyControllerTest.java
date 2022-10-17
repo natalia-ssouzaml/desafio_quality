@@ -78,7 +78,7 @@ class PropertyControllerTest {
 
 
     @Test
-    void createProperty_returnProperty_whenCreatedNewProperty() throws Exception {
+    void createProperty_returnNewProperty_whenSuccessfullyCreated() throws Exception {
         BDDMockito.when(propertyService.createProperty(property))
                 .thenReturn(property);
         ResultActions response = mockMvc.perform(
@@ -94,11 +94,9 @@ class PropertyControllerTest {
     }
 
     @Test
-    void getPropertyTotalM2_whenCorrectsAttributes() throws Exception {
+    void getPropertyTotalM2_returnTotalM2_whenSuccessfullyFound() throws Exception {
         BDDMockito.when(propertyService.createProperty(any()))
                 .thenReturn(property);
-
-        Double result = propertyService.getPropertyTotalM2(property.getName());
 
         ResultActions response = mockMvc.perform(
                 get("/property/totalM2/{property}", property.getName())
@@ -106,11 +104,11 @@ class PropertyControllerTest {
 
 
         response.andExpect(status().isOk())
-                .andExpect(jsonPath("$", CoreMatchers.is(result)));
+                .andExpect(jsonPath("$", CoreMatchers.is(0.0)));
     }
 
     @Test
-    void getPropertyValue_whenCorrectsAttributes() throws Exception {
+    void getPropertyValue_returnTotalPrice_whenSuccessfullyFound() throws Exception {
 
         BigDecimal propertyValue = new BigDecimal("34000.0");
         BDDMockito.when(propertyService.getPropertyValue(anyString()))
@@ -125,7 +123,7 @@ class PropertyControllerTest {
     }
 
     @Test
-    void getTotalM2ByRoom_whenCorrectsAttributes() throws Exception {
+    void getTotalM2ByRoom_returnTotalM2ByRoom_whenSuccessfullyFound() throws Exception {
         List<RoomDTO> roomDTOList = new ArrayList<>(List.of(roomDTO));
 
         BDDMockito.when(propertyService.getTotalM2ByRoom(property.getName()))
@@ -142,7 +140,7 @@ class PropertyControllerTest {
     }
 
     @Test
-    void getBiggestRoom_whenCorrectsAttributes() throws Exception {
+    void getBiggestRoom_returnBiggestRoom_whenSuccessfullyFound() throws Exception {
 
         BDDMockito.when(propertyService.createProperty(any()))
                 .thenReturn(property);

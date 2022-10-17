@@ -128,4 +128,17 @@
     "width" : 20.0,
     "length" : 31.0
   } ]
+}, {
+  "id" : 12,
+  "name" : "Shopping B",
+  "districtId" : 4,
+  "rooms" : [ {
+    "name" : "Quarto",
+    "width" : 6.0,
+    "length" : 3.0
+  }, {
+    "name" : "Cozinha",
+    "width" : 4.0,
+    "length" : 4.0
+  } ]
 } ]

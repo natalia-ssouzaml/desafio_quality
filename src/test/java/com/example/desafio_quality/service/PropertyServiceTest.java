@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PropertyServiceTest {
+class PropertyServiceTest {
 
     @InjectMocks
     PropertyService propertyService;
@@ -89,7 +89,6 @@ public class PropertyServiceTest {
         when(propertyService.createProperty(property)).thenReturn(property);
         Property op = propertyService.createProperty(property);
         verify(propertyRepo, times(1)).createProperty(op);
-        //   verify(districtRepo, times(2)).getDistrictById(district.getId());
         Assertions.assertEquals(district.getId(), property.getDistrictId());
         Assertions.assertNotNull(op);
     }
