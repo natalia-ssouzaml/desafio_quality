@@ -98,15 +98,13 @@ class PropertyControllerTest {
         BDDMockito.when(propertyService.createProperty(any()))
                 .thenReturn(property);
 
-        Double result = propertyService.getPropertyTotalM2(property.getName());
-
         ResultActions response = mockMvc.perform(
                 get("/property/totalM2/{property}", property.getName())
                         .contentType(MediaType.APPLICATION_JSON));
 
 
         response.andExpect(status().isOk())
-                .andExpect(jsonPath("$", CoreMatchers.is(result)));
+                .andExpect(jsonPath("$", CoreMatchers.is(0.0)));
     }
 
     @Test
