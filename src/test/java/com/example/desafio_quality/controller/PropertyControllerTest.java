@@ -131,7 +131,6 @@ class PropertyControllerTest {
     @Test
     void getPropertyValue_whenCorrectsAttributes() throws Exception {
 
-        //TEST QUE ESTÁ DANDO ERRO
         BDDMockito.when(propertyRepo.getByName(property.getName()))
                         .thenReturn(ofNullable(property));
 
