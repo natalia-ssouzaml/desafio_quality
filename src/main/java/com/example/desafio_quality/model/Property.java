@@ -21,7 +21,7 @@ public class Property {
     private String name;
 
     @NotNull(message = "The district's id can't be empty")
-    @Positive(message= "The value must be positive")
+    @Positive(message = "The value must be positive")
     private int districtId;
 
     @Valid

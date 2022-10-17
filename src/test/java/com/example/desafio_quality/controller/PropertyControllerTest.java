@@ -4,8 +4,6 @@ import com.example.desafio_quality.dto.RoomDTO;
 import com.example.desafio_quality.model.District;
 import com.example.desafio_quality.model.Property;
 import com.example.desafio_quality.model.Room;
-import com.example.desafio_quality.repository.DistrictRepo;
-import com.example.desafio_quality.repository.PropertyRepo;
 import com.example.desafio_quality.service.impl.PropertyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -22,10 +20,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.Optional.ofNullable;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,9 +31,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PropertyController.class)
 class PropertyControllerTest {
     @Autowired
-    private MockMvc mockMvc;
-    @Autowired
     ObjectMapper objectMapper;
+    @Autowired
+    private MockMvc mockMvc;
     @MockBean
     private PropertyService propertyService;
 
@@ -44,7 +41,6 @@ class PropertyControllerTest {
     private Property property;
     private RoomDTO roomDTO;
     private List<RoomDTO> roomDTOList;
-
     private District district;
 
     @BeforeEach
@@ -67,7 +63,6 @@ class PropertyControllerTest {
 
         //Adicionando Rooms a lista de rooms
         listRoom.add(roomI);
-
         listRoom.add(roomII);
 
         //Adicionando maior quarto ao roomDTO para testar.
@@ -85,7 +80,6 @@ class PropertyControllerTest {
                 .districtId(district.getId())
                 .rooms(listRoom)
                 .build();
-
     }
 
 
@@ -119,7 +113,6 @@ class PropertyControllerTest {
 
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$", CoreMatchers.is(result)));
-
     }
 
     @Test
@@ -135,7 +128,6 @@ class PropertyControllerTest {
 
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$", CoreMatchers.is(propertyValue.doubleValue())));
-
     }
 
     @Test
@@ -154,8 +146,6 @@ class PropertyControllerTest {
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", CoreMatchers.is(roomDTOList.size())))
                 .andExpect(jsonPath("$.[0].totalM2", CoreMatchers.is(roomDTOList.get(0).getTotalM2())));
-
-
     }
 
     @Test

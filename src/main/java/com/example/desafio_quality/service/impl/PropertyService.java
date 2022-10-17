@@ -43,7 +43,6 @@ public class PropertyService implements IProperty {
     }
 
 
-
     @Override
     public BigDecimal getPropertyValue(String propertyName) {
         Property property = getProperty(propertyName);
@@ -63,7 +62,6 @@ public class PropertyService implements IProperty {
     public RoomDTO getBiggestRoom(String propertyName) {
         return getTotalM2ByRoom(propertyName).stream().max(Comparator.comparing(RoomDTO::getTotalM2)).get();
     }
-
 
 
     @Override

@@ -16,11 +16,10 @@ class RoomTest {
                 .width(22)
                 .length(10)
                 .build();
-
     }
 
     @Test
-    void totalM2_returnDouble_whenValidInput (){
+    void totalM2_returnDouble_whenValidInput() {
         double resp = room.totalM2();
         assertEquals(220, resp);
         assertEquals("Quarto", room.getName());

@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +81,6 @@ public class PropertyServiceTest {
                 .districtId(district.getId())
                 .rooms(list)
                 .build();
-
     }
 
     @Test
@@ -100,7 +98,6 @@ public class PropertyServiceTest {
     void createProperty_throwsNotFoundException_whenDistrictIdDoesNotExist() {
         property.setDistrictId(99);
         assertThrows(NotFoundException.class, () -> propertyService.createProperty(property));
-
     }
 
 
@@ -109,14 +106,12 @@ public class PropertyServiceTest {
         when(propertyRepo.getByName(property.getName())).thenReturn(Optional.ofNullable(property));
         var result = propertyService.getPropertyTotalM2(property.getName());
         Assertions.assertEquals(34.0, result);
-
     }
 
     @Test
     void getPropertyTotalM2_throwsNotFoundException_whenPropertyDoesNotExist() {
         property.setName("Nome que nao existe");
         assertThrows(NotFoundException.class, () -> propertyService.getPropertyTotalM2(property.getName()));
-
     }
 
     @Test
@@ -126,7 +121,6 @@ public class PropertyServiceTest {
         when(districtRepo.getDistrictById(property.getDistrictId())).thenReturn(Optional.of(district));
         BigDecimal result = propertyService.getPropertyValue(property.getName());
         assertThat(result.compareTo(new BigDecimal(34000.00))).isZero();
-
     }
 
     @Test
@@ -135,8 +129,6 @@ public class PropertyServiceTest {
         List<RoomDTO> list = propertyService.getTotalM2ByRoom(property.getName());
         assertFalse(list.isEmpty());
         Assertions.assertEquals(18.0, list.get(0).getTotalM2());
-
-
     }
 
     @Test
@@ -146,7 +138,6 @@ public class PropertyServiceTest {
         assertFalse(list.isEmpty());
         Assertions.assertEquals(18.0, biggest.getTotalM2());
         Assertions.assertEquals("Quarto", biggest.getName());
-
     }
 
 }
