@@ -95,8 +95,6 @@ class PropertyControllerTest {
 
     @Test
     void getPropertyTotalM2_returnTotalM2_whenSuccessfullyFound() throws Exception {
-        BDDMockito.when(propertyService.createProperty(any()))
-                .thenReturn(property);
 
         ResultActions response = mockMvc.perform(
                 get("/property/totalM2/{property}", property.getName())
