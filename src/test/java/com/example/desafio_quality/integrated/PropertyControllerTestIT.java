@@ -20,15 +20,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles(value = "test")
-public class PropertyControllerTestIT {
-
-//    @Autowired
-//    private ConfigurableEnvironment env;
+class PropertyControllerTestIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -66,7 +64,7 @@ public class PropertyControllerTestIT {
 
 
     @Test
-    void newProperty_returnNewProperty_whenSuccessfullyCreated() throws Exception {
+    void createProperty_returnNewProperty_whenSuccessfullyCreated() throws Exception {
         ResultActions response = mockMvc.perform(
                 post("/property", property)
                         .content(objectMapper.writeValueAsString(property))
@@ -75,6 +73,55 @@ public class PropertyControllerTestIT {
 
         response.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name", CoreMatchers.is(property.getName())));
+    }
+
+
+    @Test
+    void getPropertyTotalM2_returnTotalM2_whenSuccessfullyFound() throws Exception {
+        ResultActions response = mockMvc.perform(
+                get("/property/totalM2/{property}", "Shopping Z")
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        response.andExpect(status().isOk())
+                .andExpect(jsonPath("$", CoreMatchers.is(792.0)));
+    }
+
+    @Test
+    void getPropertyValue_returnTotalPrice_whenSuccessfullyFound() throws Exception {
+        ResultActions response = mockMvc.perform(
+                get("/property/price/{property}", "Shopping Z")
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        response.andExpect(status().isOk())
+                .andExpect(jsonPath("$", CoreMatchers.is(792000.0)));
+    }
+
+    @Test
+    void getTotalM2ByRoom_returnTotalM2ByRoom_whenSuccessfullyFound() throws Exception {
+        ResultActions response = mockMvc.perform(
+                get("/property/totalM2ByRooms/{property}", "Shopping Z")
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        response.andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()", CoreMatchers.is(2)))
+                .andExpect(jsonPath("$.[0].name", CoreMatchers.is("Farmacia")))
+                .andExpect(jsonPath("$.[0].totalM2", CoreMatchers.is(240.0)));
+
+    }
+
+    @Test
+    void getBiggestRoom_returnBiggestRoom_whenSuccessfullyFound() throws Exception {
+        ResultActions response = mockMvc.perform(
+                get("/property/biggestRoom/{property}", "Shopping Z")
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        response.andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", CoreMatchers.is("Americanas")))
+                .andExpect(jsonPath("$.totalM2", CoreMatchers.is(552.0)));
     }
 
 
