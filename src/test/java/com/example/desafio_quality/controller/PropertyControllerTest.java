@@ -40,12 +40,6 @@ class PropertyControllerTest {
     @MockBean
     private PropertyService propertyService;
 
-    @MockBean
-    private DistrictRepo districtRepo;
-
-    @MockBean
-    private PropertyRepo propertyRepo;
-
     //Tipos de retornos ResponseEntity
     private Property property;
     private RoomDTO roomDTO;
@@ -131,31 +125,16 @@ class PropertyControllerTest {
     @Test
     void getPropertyValue_whenCorrectsAttributes() throws Exception {
 
-        BDDMockito.when(propertyRepo.getByName(property.getName()))
-                        .thenReturn(ofNullable(property));
+        BigDecimal propertyValue = new BigDecimal("34000.0");
+        BDDMockito.when(propertyService.getPropertyValue(anyString()))
+                .thenReturn(propertyValue);
 
-        BDDMockito.when(propertyService.createProperty(any()))
-                        .thenReturn(property);
-
-        BDDMockito.when(districtRepo.getDistrictById(property.getId()))
-                .thenReturn(ofNullable(district));
-
-        BDDMockito.when(propertyService.getPropertyTotalM2(any()))
-                .thenReturn(34.0);
-
-
-        BigDecimal result = propertyService.getPropertyValue(property.getName());
-
-        System.out.println(district);
-        System.out.println(property);
-        System.out.println(result);
         ResultActions response = mockMvc.perform(
                 get("/property/price/{property}", property.getName())
                         .contentType(MediaType.APPLICATION_JSON));
 
-
         response.andExpect(status().isOk())
-                .andExpect(jsonPath("$", CoreMatchers.is(result.doubleValue())));
+                .andExpect(jsonPath("$", CoreMatchers.is(propertyValue.doubleValue())));
 
     }
 
